@@ -1,0 +1,123 @@
+- name: "nsg-allow-all-mgmt"
+  sub_name: "eslz-management" # <<== Display name of target subscription. Update to match your own. Subscription display names should not be used to define resources in production deployments, they can change.
+  rg_name: "rg-mgmt-nsgs" # <<== Name of the target resource group for the NSG. Must be part of this TF deployment, or already exist
+  location: "australiaeast"
+  #parent_id: "/subscriptions/xxxxxxxxxxxxxxxxxxxxx/resourceGroups/rg-mgmt-nsgs" # <<== OPTIONAL, if specified this path is used, as opposed to dynamic lookup for the target resource group based on value of "rg_name:"
+  subnet_network_security_group_associations: 
+    - name: "nsg-allow-all-mgmt-to-vnet-mgmt-test-subnet"
+      subnet_id: "/subscriptions/xxxxxxxxxxxxxxxxxxxxx/resourceGroups/rg-mgmt-vnets/providers/Microsoft.Network/virtualNetworks/vnet-mgmt/subnets/test-subnet"
+      associated_state: false
+  tags:
+  flushConnection: false
+  securityRules:
+  - name: rule1
+    properties:
+      protocol: '*'
+      #sourceAddressPrefix: '*'
+      sourceAddressPrefixes: 
+        - "10.0.0.0/24"
+        - "192.168.10.0/24"
+      destinationAddressPrefix: '*'
+      access: Allow
+      destinationPortRange: '80'
+      sourcePortRange: '*'
+      priority: 130
+      direction: Inbound
+  - name: allow_dns
+    properties:
+      protocol: '*'
+      sourceApplicationSecurityGroups:
+        - name: asg-app1-mgmt
+        #- id: "/subscriptions/xxxxxxxxxxxxxxxxxxxxxxxx/resourceGroups/rg-mgmt-nsgs/providers/Microsoft.Network/applicationSecurityGroups/asg-app1-mgmt"
+      destinationAddressPrefix: '*'
+      access: Allow
+      destinationPortRange: '53'
+      sourcePortRange: '*'
+      priority: 131
+      direction: Inbound
+  - name: allow_dns2
+    properties:
+      protocol: '*'
+      sourceApplicationSecurityGroups:
+        - name: asg-app2-mgmt
+        #- id: "/subscriptions/xxxxxxxxxxxxxxxxxxxxxxxxxxx/resourceGroups/rg-mgmt-nsgs/providers/Microsoft.Network/applicationSecurityGroups/asg-app1-mgmt"
+      destinationAddressPrefix: '*'
+      access: Allow
+      destinationPortRange: '53'
+      sourcePortRange: '*'
+      priority: 132
+      direction: Inbound
+  - name: rule2
+    properties:
+      protocol: '*'
+      sourceAddressPrefix: '*'
+      destinationAddressPrefix: '*'
+      access: Allow
+      destinationPortRange: '80'
+      sourcePortRange: '*'
+      priority: 130
+      direction: Outbound
+
+- name: "nsg-allow-all-connectivity"
+  sub_name: "eslz-connectivity" # # <<== Display name of target subscription. Update to match your own. Subscription display names should not be used to define resources in production deployments, they can change.
+  rg_name: "rg-connectivity-nsgs" # <<== Name of the target resource group for the NSG. Must be part of this TF deployment, or already exist
+  location: "australiaeast"
+  # subnet_network_security_group_associations:
+  #    - name: "nsg-allow-all-connectivity-to-vnet-connectivity-sharedservices-ae-connectivity-subnet-1"
+  #      subnet_id: "/subscriptions/xxxxxxxxxxxxxxxxxxxxxxxxx/resourceGroups/rg-connectivity-sharedservices-ae/providers/Microsoft.Network/virtualNetworks/vnet-connectivity-sharedservices-ae/subnets/connectivity-subnet-1"
+  #      associated_state: false
+  tags:
+  flushConnection: false
+  securityRules:
+  - name: rule1
+    properties:
+      protocol: '*'
+      sourceAddressPrefix: '*'
+      destinationAddressPrefix: '*'
+      access: Allow
+      destinationPortRange: '80'
+      sourcePortRange: '*'
+      priority: 130
+      direction: Inbound
+  - name: rule2
+    properties:
+      protocol: '*'
+      sourceAddressPrefix: '*'
+      destinationAddressPrefix: '*'
+      access: Allow
+      destinationPortRange: '80'
+      sourcePortRange: '*'
+      priority: 130
+      direction: Outbound
+
+- name: "nsg-allow-all-identity"
+  sub_name: "eslz-identity-infosec" # # <<== Display name of target subscription. Update to match your own. Subscription display names should not be used to define resources in production deployments, they can change.
+  rg_name: "rg-identity-nsgs" # <<== Name of the target resource group for the NSG. Must be part of this TF deployment, or already exist
+  location: "australiaeast"
+  subnet_network_security_group_associations:
+    #  - name: "nsg-allow-all-to-subnet-gwlb-ae"
+    #    subnet_id: "subnet-gwlb-ae"
+    #    associated_state: false
+  tags:
+  flushConnection: false
+  securityRules:
+  # - name: rule1
+  #   properties:
+  #     protocol: '*'
+  #     sourceAddressPrefix: '*'
+  #     destinationAddressPrefix: '*'
+  #     access: Allow
+  #     destinationPortRange: '80'
+  #     sourcePortRange: '*'
+  #     priority: 130
+  #     direction: Inbound
+  - name: rule2
+    properties:
+      protocol: '*'
+      sourceAddressPrefix: '*'
+      destinationAddressPrefix: '*'
+      access: Allow
+      destinationPortRange: '80'
+      sourcePortRange: '*'
+      priority: 130
+      direction: Outbound

@@ -1,0 +1,20 @@
+- name: "rg-mgmt-nsgs"
+  #sub_name: "eslz-management" # <<== Display name of target subscription. Update to match your own. Subscription display names should not be used to define resources in production deployments, they can change.
+  parent_id: "/subscriptions/a84291c3-e39b-41e6-84eb-27540c26de9c"
+  location: "australiaeast"
+  tags: 
+    billing_code: "demo"
+
+- name: "rg-connectivity-nsgs"
+  #sub_name: "eslz-connectivity" # <<== Display name of target subscription. Update to match your own. Subscription display names should not be used to define resources in production deployments, they can change.
+  parent_id: "/subscriptions/35bc9ee5-7aba-4723-9eac-01b8294344f7"
+  location: "australiaeast"
+  tags: 
+    billing_code: "test"
+
+- name: "rg-identity-nsgs"
+  #sub_name: "eslz-identity-infosec" # <<== Display name of target subscription. Update to match your own. Subscription display names should not be used to define resources in production deployments, they can change.
+  parent_id: "/subscriptions/8fa5f8a1-8852-49b5-9e70-e5481c356692"
+  location: "australiaeast"
+  tags: 
+    billing_code: "test"

@@ -1,0 +1,21 @@
+
+# ! NOTE: All vNics assigned to an ASG must be part of the same VNET i.e. ASG vNICs => VNET = 1:1
+
+- name: "asg-app1-mgmt"
+  rg_name: "rg-mgmt-nsgs" # <<== Name of the target resource group for the NSG. Must be part of this TF deployment, or already exist
+  #parent_id: "/subscriptions/xxxxxxxxxxxxxxxxxx/resourceGroups/rg-mgmt-nsgs" # <<== OPTIONAL, if specified this path is used, as opposed to dynamic lookup for the target resource group based on value of "rg_name:"
+  location: "australiaeast"
+
+- name: "asg-app2-mgmt"
+  rg_name: "rg-mgmt-nsgs" # <<== Name of the target resource group for the NSG. Must be part of this TF deployment, or already exist
+  location: "australiaeast"
+
+- name: "asg-dns-mgmt"
+  rg_name: "rg-mgmt-nsgs" # <<== Name of the target resource group for the NSG. Must be part of this TF deployment, or already exist
+  location: "australiaeast"
+
+- name: "asg-app1-connectivity"
+  rg_name: "rg-connectivity-nsgs" # <<== Name of the target resource group for the NSG. Must be part of this TF deployment, or already exist
+  location: "australiaeast"
+
+  
