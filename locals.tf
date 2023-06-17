@@ -53,11 +53,11 @@ locals {
   nsg_subnet_associations_flatten = flatten([for nsg in local.nsgs_config_raw :
     [for nsg_subnet_association in nsg.subnet_network_security_group_associations :
       {
-        name             = nsg_subnet_association.name
-        nsg_name         = nsg.name
-        subnet_name      = try(nsg_subnet_association.subnet_name, null)
-        subnet_id        = nsg_subnet_association.subnet_id
-        associated_state = nsg_subnet_association.associated_state
+        name               = nsg_subnet_association.name
+        nsg_name           = nsg.name
+        subnet_name        = try(nsg_subnet_association.subnet_name, null)
+        subnet_id          = nsg_subnet_association.subnet_id
+        enable_association = nsg_subnet_association.enable_association
       }
     ]
     if nsg.subnet_network_security_group_associations != null

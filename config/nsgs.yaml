@@ -6,7 +6,7 @@
   subnet_network_security_group_associations: 
     - name: "nsg-allow-all-mgmt-to-vnet-mgmt-test-subnet"
       subnet_id: "/subscriptions/xxxxxxxxxxxxxxxxxxxxx/resourceGroups/rg-mgmt-vnets/providers/Microsoft.Network/virtualNetworks/vnet-mgmt/subnets/test-subnet"
-      associated_state: false
+      enable_association: true # <<== toggle to true or false to cause azapi_update_resource to associate or disassoicate this NSG with the given subnet. Must be toggled to "false" and 'terraform apply' run to clear association before NSG can be deleted.
   tags:
   flushConnection: false
   securityRules:
@@ -63,9 +63,9 @@
   rg_name: "rg-connectivity-nsgs" # <<== Name of the target resource group for the NSG. Must be part of this TF deployment, or already exist
   location: "australiaeast"
   subnet_network_security_group_associations:
-  #    - name: "nsg-allow-all-connectivity-to-vnet-connectivity-sharedservices-ae-connectivity-subnet-1"
-  #      subnet_id: "/subscriptions/xxxxxxxxxxxxxxxxxxxxxxxxx/resourceGroups/rg-connectivity-sharedservices-ae/providers/Microsoft.Network/virtualNetworks/vnet-connectivity-sharedservices-ae/subnets/connectivity-subnet-1"
-  #      associated_state: false
+    - name: "nsg-allow-all-connectivity-to-vnet-connectivity-sharedservices-ae-connectivity-subnet-1"
+      subnet_id: "/subscriptions/xxxxxxxxxxxxxxxxxxxxxxxxx/resourceGroups/rg-connectivity-sharedservices-ae/providers/Microsoft.Network/virtualNetworks/vnet-connectivity-sharedservices-ae/subnets/connectivity-subnet-1"
+      enable_association: false # <<== toggle to true or false to cause azapi_update_resource to associate or disassoicate this NSG with the given subnet. Must be toggled to "false" and 'terraform apply' run to clear association before NSG can be deleted.
   tags:
   flushConnection: false
   securityRules:
