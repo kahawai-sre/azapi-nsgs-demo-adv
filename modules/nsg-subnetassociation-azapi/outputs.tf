@@ -6,7 +6,7 @@
 # }
 
 output "subnet_id" {
-  value = try(jsondecode(azapi_update_resource.this.output).id, null)
+  value = try(jsondecode(azapi_update_resource.NSG-SUBNET-ASSOCIATION.output).id, null)
 }
 
 

@@ -1,5 +1,5 @@
 
-resource "azapi_resource" "this" {
+resource "azapi_resource" "ASG" {
   type                   = "Microsoft.Network/applicationSecurityGroups@2022-07-01"
   name                   = var.name
   location               = var.location

@@ -1,6 +1,6 @@
 
 
-resource "azapi_update_resource" "this" {
+resource "azapi_update_resource" "NSG-SUBNET-ASSOCIATION" {
   type        = "Microsoft.Network/virtualNetworks/subnets@2022-07-01"
   resource_id = var.subnet_id
   #// NOTE: the conditional based on 'var.enable_association' below is a workaround for the limitation with azapi_update_resource 

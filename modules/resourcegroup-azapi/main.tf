@@ -1,5 +1,5 @@
 
-resource "azapi_resource" "this" {
+resource "azapi_resource" "RESOURCEGROUP" {
   type                   = "Microsoft.Resources/resourceGroups@2022-09-01"
   name                   = var.name
   location               = var.location
